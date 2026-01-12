@@ -8,9 +8,15 @@ export default function SearchBox({ updateInfo }) {
     const API_URL = import.meta.env.VITE_WEATHER_API_URL;
     const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
+    console.log("API_URL =", API_URL);
+    console.log("API_KEY =", API_KEY);
 
 
     const getWeatherInfo = async () => {
+         if (!API_URL || !API_KEY) {
+      throw new Error("Missing API configuration");
+    }
+    
         const response = await fetch(
             `${API_URL}?q=${city.trim()},IN&appid=${API_KEY}&units=metric`
         );
